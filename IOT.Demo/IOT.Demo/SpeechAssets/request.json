@@ -1,0 +1,42 @@
+{
+  "version": "1.0",
+  "session": {
+    "new": false,
+    "sessionId": "amzn1.echo-api.session.[unique-value-here]",
+    "application": {
+      "applicationId": "amzn1.ask.skill.[unique-value-here]"
+    },
+    "attributes": {
+      "memberId": 0
+    },
+    "user": {
+      "userId": "amzn1.ask.account.[unique-value-here]"
+    }
+  },
+  "context": {
+    "System": {
+      "application": {
+        "applicationId": "amzn1.ask.skill.[unique-value-here]"
+      },
+      "user": {
+        "userId": "amzn1.ask.account.[unique-value-here]"
+      },
+      "device": {
+        "deviceId": "amzn1.ask.device.[unique-value-here]",
+        "supportedInterfaces": {}
+      },
+      "apiEndpoint": "https://api.eu.amazonalexa.com",
+      "apiAccessToken": "[unique-value-here]"
+    }
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "amzn1.echo-api.request.[unique-value-here]",
+    "timestamp": "2019-09-22T11:28:21Z",
+    "locale": "en-GB",
+    "intent": {
+      "name": "CodegardenIntent",
+      "confirmationStatus": "NONE"
+    }
+  }
+}

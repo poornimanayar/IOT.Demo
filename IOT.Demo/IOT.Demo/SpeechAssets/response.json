@@ -1,0 +1,26 @@
+{
+  "body": {
+    "version": "1.0",
+    "response": {
+      "outputSpeech": {
+        "type": "PlainText",
+        "text": "\"Codegarden 2020 starts on 26th May 2020. There are 246 days to Codegarden 2020. \""
+      },
+      "card": {
+        "type": "Simple",
+        "title": "How many days to CodeGarden?",
+        "content": "\"Codegarden 2020 starts on 26th May 2020. There are 246 days to Codegarden 2020. \""
+      },
+      "reprompt": {
+        "outputSpeech": {
+          "type": "PlainText"
+        }
+      },
+      "shouldEndSession": false,
+      "type": "_DEFAULT_RESPONSE"
+    },
+    "sessionAttributes": {
+      "memberId": 0
+    }
+  }
+}
