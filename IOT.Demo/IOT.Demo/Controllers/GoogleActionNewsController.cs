@@ -34,11 +34,12 @@ namespace IOT.Demo.Umbraco.Controllers
                     request = jsonParser.Parse<WebhookRequest>(reader);
                 }
                 var responseJson = new WebhookResponse { FulfillmentText = "Hey, I did not get you. What do you want to know about?" };
-              
+
                 if (request.QueryResult.Intent.DisplayName == "NewsIntent")
                 {
-                    var articleList = Umbraco.ContentSingleAtXPath("//home/articleList").Children().OfType<Article>().OrderByDescending(a => a.Date);
+                    var articleList = Umbraco.ContentSingleAtXPath("//home/articleList").Children().OfType<Article>();
                     var outputText = new StringBuilder();
+                    Logger.Info(typeof(GoogleActionNewsApiController), "entered intent");
 
                     var fulfillmentCarousel = new Intent.Types.Message.Types.CarouselSelect();
                     var fulfillmentMessages = new Intent.Types.Message();
@@ -46,17 +47,25 @@ namespace IOT.Demo.Umbraco.Controllers
 
                     foreach (var article in articleList)
                     {
-                        outputText.Append(article.IotTitle);
-                        outputText.Append(string.Empty);
-                        fulfillmentCarousel.Items.Add(new Intent.Types.Message.Types.CarouselSelect.Types.Item { Title = article.IotTitle, Description = article.TextContent, Info = new Intent.Types.Message.Types.SelectItemInfo { Key = article.Key.ToString() }, Image = new Intent.Types.Message.Types.Image { ImageUri = "https://iot-demo.kvtechsltd.co.uk/media/xldnfcwl/friendly-chair.jpg", AccessibilityText = "Friendly Umbraco Chair" } });
+                        //this can be made better :D
+                        outputText.Append(string.Concat(article.IotTitle, " - ", article.TextContent, " "));
+                        fulfillmentCarousel.Items.Add(new Intent.Types.Message.Types.CarouselSelect.Types.Item
+                        {
+                            Title = article.IotTitle,
+                            Description = article.TextContent,
+                            Info = new Intent.Types.Message.Types.SelectItemInfo { Key = article.Key.ToString() },
+                            Image = new Intent.Types.Message.Types.Image { ImageUri = "https://iot-demo.kvtechsltd.co.uk/media/xldnfcwl/friendly-chair.jpg", AccessibilityText = "Friendly Umbraco Chair" }
+                        }
+                        );
                     }
                     fulfillmentMessages.CarouselSelect = fulfillmentCarousel;
                     responseJson = new WebhookResponse
                     {
                         FulfillmentMessages = { fulfillmentMessages },
-                        FulfillmentText = "Hey, here is the latest blog posts from Meetup Demo : " + outputText.ToString()
+                        FulfillmentText = "Hey, here is the latest Meetup News : " + outputText.ToString()
 
                     };
+                    Logger.Info(typeof(GoogleActionNewsApiController), outputText.ToString());
                 }
 
                 HttpResponseMessage httpResponse = new HttpResponseMessage(HttpStatusCode.OK)
