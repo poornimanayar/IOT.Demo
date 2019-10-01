@@ -1,53 +1,51 @@
 {
-  "interactionModel": {
-    "languageModel": {
-      "invocationName": "umbraco scoop",
-      "intents": [
-        {
-          "name": "LatestNewsIntent",
-          "slots": [],
-          "samples": [
-            "what's latest in umbraco",
-            "what's up with Umbraco",
-            "latest",
-            "latest scoop",
-            "top news from umbraco",
-            "news",
-            "Latest from Umbraco",
-            "Latest news",
-            "What's latest from Umbraco",
-            "Top Umbraco News",
-            "Umbraco News",
-            "What is the latest Umbraco News"
-          ]
-        },
-        {
-          "name": "AMAZON.CancelIntent",
-          "samples": [
-            "Cancel",
-            "Quit"
-          ]
-        },
-        {
-          "name": "AMAZON.StopIntent",
-          "samples": [
-            "Stop"
-          ]
-        },
-        {
-          "name": "AMAZON.HelpIntent",
-          "samples": [
-            "Help",
-            "Help please"
-          ]
-        },
-        {
-          "name": "AMAZON.NavigateHomeIntent",
-          "samples": []
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "friendly events",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": [
+                        "Quit",
+                        "Exit",
+                        "Stop",
+                        "Cancel"
+                    ]
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": [
+                        "Help"
+                    ]
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": [
+                        "Thank you",
+                        "Thanks"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "CodegardenIntent",
+                    "slots": [],
+                    "samples": [
+                        "next Codegarden",
+                        "Codegarden",
+                        "When is the most unique developer conference happening",
+                        "How many days to Codegarden",
+                        "When is the next Codegarden"
+                    ]
+                }
+            ],
+            "types": []
         }
-
-      ],
-      "types": []
     }
-  }
 }

@@ -1,26 +1,30 @@
 {
-  "body": {
-    "version": "1.0",
-    "response": {
-      "outputSpeech": {
-        "type": "PlainText",
-        "text": "\"Codegarden 2020 starts on 26th May 2020. There are 246 days to Codegarden 2020. \""
-      },
-      "card": {
-        "type": "Simple",
-        "title": "How many days to CodeGarden?",
-        "content": "\"Codegarden 2020 starts on 26th May 2020. There are 246 days to Codegarden 2020. \""
-      },
-      "reprompt": {
-        "outputSpeech": {
-          "type": "PlainText"
-        }
-      },
-      "shouldEndSession": false,
-      "type": "_DEFAULT_RESPONSE"
-    },
-    "sessionAttributes": {
-      "memberId": 0
-    }
-  }
+	"body": {
+		"version": "1.0",
+		"response": {
+			"outputSpeech": {
+				"type": "PlainText",
+				"text": "CodeGarden '20 starts on 27 May 2020. There are 238 days to CodeGarden."
+			},
+			"card": {
+				"type": "Standard",
+				"title": "Umbraco Festivals",
+				"text": "CodeGarden '20 starts on 27 May 2020. There are 238 days to CodeGarden.",
+				"image": {
+					"smallImageUrl": "https://iot-demo.kvtechsltd.co.uk/media/cxvl1tw3/codegarden.jpg",
+					"largeImageUrl": "https://iot-demo.kvtechsltd.co.uk/media/cxvl1tw3/codegarden.jpg"
+				}
+			},
+			"reprompt": {
+				"outputSpeech": {
+					"type": "PlainText"
+				}
+			},
+			"shouldEndSession": false,
+			"type": "_DEFAULT_RESPONSE"
+		},
+		"sessionAttributes": {
+			"memberId": 0
+		}
+	}
 }

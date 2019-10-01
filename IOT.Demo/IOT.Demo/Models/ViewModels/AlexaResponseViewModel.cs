@@ -26,7 +26,7 @@ namespace IOT.Demo.Umbraco.Models.ViewModels
             : this()
         {
             Response.OutputSpeech.Text = outputSpeechText;
-            Response.Card.Content = outputSpeechText;
+            Response.Card.Text = outputSpeechText;
         }
 
         public AlexaResponseViewModel(string outputSpeechText, bool shouldEndSession)
@@ -37,7 +37,7 @@ namespace IOT.Demo.Umbraco.Models.ViewModels
 
             if (shouldEndSession)
             {
-                Response.Card.Content = outputSpeechText;
+                Response.Card.Text = outputSpeechText;
             }
             else
             {
@@ -49,34 +49,39 @@ namespace IOT.Demo.Umbraco.Models.ViewModels
             : this()
         {
             Response.OutputSpeech.Text = outputSpeechText;
-            Response.Card.Content = cardContent;
+            Response.Card.Text = cardContent;
             Response.ShouldEndSession = shouldEndSession;
 
             if (shouldEndSession)
             {
-                Response.Card.Content = outputSpeechText;
+                Response.Card.Text = outputSpeechText;
             }
             else
             {
-                Response.Card = new ResponseAttributes.CardAttributes { Content = cardContent };
+                Response.Card = new ResponseAttributes.CardAttributes { Text = cardContent };
             }
         }
 
-        public AlexaResponseViewModel(string outputSpeechText, string cardContent, string cardTitle, bool shouldEndSession)
+        public AlexaResponseViewModel(string outputSpeechText, string cardContent, string cardTitle, string imageUrl, bool shouldEndSession)
             : this()
         {
             Response.OutputSpeech.Text = outputSpeechText;
-            Response.Card.Content = cardContent;
+            Response.Card.Text = cardContent;
             Response.Card.Title = cardTitle;
+            Response.Card.Image = new AlexaResponseViewModel.ResponseAttributes.ImageAttributes
+            {
+                SmallImageUrl = imageUrl,
+                LargeImageUrl = imageUrl
+            };
             Response.ShouldEndSession = shouldEndSession;
 
             if (shouldEndSession)
             {
-                Response.Card.Content = outputSpeechText;
+                Response.Card.Text = outputSpeechText;
             }
             else
             {
-                Response.Card = new ResponseAttributes.CardAttributes { Title = cardTitle, Content = cardContent };
+                Response.Card = new ResponseAttributes.CardAttributes { Title = cardTitle, Text = cardContent, Image= new ResponseAttributes.ImageAttributes { SmallImageUrl = imageUrl, LargeImageUrl = imageUrl } };
             }
         }
 
@@ -137,14 +142,28 @@ namespace IOT.Demo.Umbraco.Models.ViewModels
                 [JsonProperty("title")]
                 public string Title { get; set; }
 
-                [JsonProperty("content")]
-                public string Content { get; set; }
+                [JsonProperty("text")]
+                public string Text { get; set; }
+
+                [JsonProperty("image")]
+                public ImageAttributes Image { get; set; }
 
                 public CardAttributes()
                 {
-                    Type = "Simple";
+                    Type = "Standard";
                 }
             }
+
+            [JsonObject("image")]
+            public class ImageAttributes
+            {
+                [JsonProperty("smallImageUrl")]
+                public string SmallImageUrl { get; set; }
+
+                [JsonProperty("largeImageUrl")]
+                public string LargeImageUrl { get; set; }
+            }
+
 
             [JsonObject("reprompt")]
             public class RepromptAttributes

@@ -15,7 +15,7 @@ namespace IOT.Demo.Umbraco.Controllers
     public class AlexaCodeGardenApiController : UmbracoApiController
     {
 
-        const string AlexaNewsApplicationId = "amzn1.ask.skill.0f15b94f-c1d7-4913-96fe-9df735259821";
+        private string AlexaUmbracoFestivalsApplicationId = WebConfigurationManager.AppSettings["Alexa.ApplicationId"];
 
 
         [System.Web.Http.HttpPost]
@@ -23,11 +23,14 @@ namespace IOT.Demo.Umbraco.Controllers
         {
             if (WebConfigurationManager.AppSettings["mode"] != "debug")
             {
-                if (request.Session.Application.ApplicationId != AlexaNewsApplicationId)
+                //verify the application id
+                if (request.Session.Application.ApplicationId != AlexaUmbracoFestivalsApplicationId)
                 {
                     throw new HttpResponseException(new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest));
                 }
 
+                //service should only process requests in which the timestamp is within 150 seconds of the current time. 
+                //If the timestamp differs from the current time by more than 150 seconds, discard the request. 
                 var totalSeconds = (System.DateTime.UtcNow - request.Request.Timestamp).TotalSeconds;
                 if (totalSeconds < 0 || totalSeconds > 150)
                 {
@@ -55,12 +58,7 @@ namespace IOT.Demo.Umbraco.Controllers
 
         private AlexaResponseViewModel LaunchRequestHandler(AlexaRequestViewModel request)
         {
-            var response = new AlexaResponseViewModel("Welcome to Umbraco scoop!");
-            response.Response.Card.Title = "Umbraco Scoop";
-            response.Response.Card.Content = "Welcome to Umbraco scoop!";
-            response.Response.Reprompt.OutputSpeech.Text = "Please pick one, news, packages, meet-ups or upcoming festivals?";
-            response.Response.ShouldEndSession = false;
-            return response;
+            return new AlexaResponseViewModel("Welcome to Friendly Events!", "Welcome to Friendly Events!", "Friendly Events", "https://iot-demo.kvtechsltd.co.uk/media/cxvl1tw3/codegarden.jpg", false);
         }
 
         private AlexaResponseViewModel IntentRequestHandler(AlexaRequestViewModel request)
@@ -69,7 +67,8 @@ namespace IOT.Demo.Umbraco.Controllers
             
             switch (request.Request.Intent.Name)
             {
-                case "CodeGardenIntent":
+                case "CodegardenIntent":
+                    Logger.Info(typeof(AlexaCodeGardenApiController), "entered intent");
                     var codegardenNode = Umbraco.ContentSingleAtXPath("//home/codeGarden") as CodeGarden;
                     var prompt = codegardenNode.Response;
                     var codegardenDate = codegardenNode.Date;
@@ -79,9 +78,9 @@ namespace IOT.Demo.Umbraco.Controllers
                         var numberOfDays = codegardenDate.Subtract(DateTime.UtcNow).Days;
                         var daysText = numberOfDays > 1 ? "days" : "day";
                         speechResponse = prompt.Replace("{date}", codegardenDate.ToLongDateString()).Replace("{number}", numberOfDays.ToString()).Replace("{days}", daysText);
+                       
                     }
-
-                    response = new AlexaResponseViewModel(speechResponse, speechResponse, "How many days to CodeGarden?", false);
+                    response = new AlexaResponseViewModel(speechResponse, speechResponse, "Friendly Events", "https://iot-demo.kvtechsltd.co.uk/media/cxvl1tw3/codegarden.jpg", false);
                     break;
                 case "AMAZON.CancelIntent":
                 case "AMAZON.StopIntent":
@@ -90,8 +89,11 @@ namespace IOT.Demo.Umbraco.Controllers
                 case "AMAZON.HelpIntent":
                     response = HelpIntentHandler(request);
                     break;
+                case "AMAZON.FallbackIntent":
+                    response = FallbackIntentHandler(request);
+                    break;
                 default:
-                    response = HelpIntentHandler(request);
+                    response = FallbackIntentHandler(request);
                     break;
             }
 
@@ -100,8 +102,14 @@ namespace IOT.Demo.Umbraco.Controllers
 
         private AlexaResponseViewModel HelpIntentHandler(AlexaRequestViewModel request)
         {
-            var response = new AlexaResponseViewModel("To use the Umbraco Scoop skill, you can say, Alexa, ask Umbraco Scoop for what's latest in Umbraco, to retrieve the upcoming festivals or say, Alexa, ask Umbraco Scoop for upcoming festivals, to retrieve the upcoming meet-ups or say, Alexa, ask Umbraco Scoop for meet-ups, to retrieve information about latest packages say, Alexa, ask Umbraco Scoop for packages. You can also say, Alexa, stop or Alexa, cancel, at any time to exit the Umbraco Scoop skill. To know about next Codegarden ask, how many days to Codegarden. For now, do you want to hear the latest scoop, packages, meet-ups or upcoming festivals?", false);
-            response.Response.Reprompt.OutputSpeech.Text = "Please select one, latest scoop, packages, meet-ups or upcoming festivals?";
+            var response = new AlexaResponseViewModel("To use the Friendly Events skill, you can say, Alexa, ask Friendly Events how many days to Codegarden?", false);
+            response.Response.Reprompt.OutputSpeech.Text = "To use the Friendly Events skill, you can say, Alexa, ask Friendly Events how many days to Codegarden?";
+            return response;
+        }
+
+        private AlexaResponseViewModel FallbackIntentHandler(AlexaRequestViewModel request)
+        {
+            var response = new AlexaResponseViewModel("Sorry, I didnt understand that. To use this skill say, Alexa, ask Friendly Events how many days to codegarden?", false);
             return response;
         }
 
