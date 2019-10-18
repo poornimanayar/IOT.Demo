@@ -1,13 +1,9 @@
 ﻿using IOT.Demo.Umbraco.Models.CmsGenerated;
 using IOT.Demo.Umbraco.Models.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Web;
 using System.Web.Configuration;
 using System.Web.Http;
-using System.Web.Mvc;
 using Umbraco.Web.WebApi;
 
 namespace IOT.Demo.Umbraco.Controllers
@@ -82,7 +78,7 @@ namespace IOT.Demo.Umbraco.Controllers
                     }
                     response = new AlexaResponseViewModel(speechResponse, speechResponse, "Friendly Events", "https://iot-demo.kvtechsltd.co.uk/media/cxvl1tw3/codegarden.jpg", false);
                     break;
-                case "AMAZON.CancelIntent":
+                case "AMAZON.CancelIntent": //handling built-in intents
                 case "AMAZON.StopIntent":
                     response = CancelOrStopIntentHandler(request);
                     break;
