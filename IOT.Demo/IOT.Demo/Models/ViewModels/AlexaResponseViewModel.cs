@@ -62,7 +62,7 @@ namespace IOT.Demo.Umbraco.Models.ViewModels
             }
         }
 
-        public AlexaResponseViewModel(string outputSpeechText, string cardContent, string cardTitle, string imageUrl, bool shouldEndSession)
+        public AlexaResponseViewModel(string outputSpeechText, string cardTitle, string cardContent, string imageUrl, bool shouldEndSession)
             : this()
         {
             Response.OutputSpeech.Text = outputSpeechText;

@@ -1,0 +1,36 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Festival>
+@using ContentModels = IOT.Demo.Umbraco.Models.CmsGenerated;
+@using Clean.Core.ViewModels
+@using Clean.Core.Extensions
+@using System.Globalization;
+@{
+  Layout = "master.cshtml";
+}
+
+@Html.Partial("~/Views/Partials/pageHeader.cshtml", new PageHeaderViewModel(Model.Name, Model.Title, Model.Subtitle, Model.MainImage))
+
+<article>
+  @Html.GetGridHtml(Model, "mainContent", "Clean", fluidImages: true)
+</article>
+@{
+  var festivalNode = Umbraco.ContentAtXPath("//home/festival").OfType<Festival>().FirstOrDefault(f => f.ConferenceNameSynonyms.Contains("UK fest", StringComparer.InvariantCultureIgnoreCase));
+  <p>@festivalNode.Name</p>
+  <p>@DateTime.ParseExact("15:30","HH:mm", CultureInfo.InvariantCulture)
+  </p>
+    var timeSlots = festivalNode.Schedule.OfType<ScheduleItem>().Where(s => DateTime.ParseExact("15:30", "HH:mm", CultureInfo.InvariantCulture) >= DateTime.ParseExact(s.TimeFrom, "HH:mm", CultureInfo.InvariantCulture) && DateTime.ParseExact("15:30", "HH:mm", CultureInfo.InvariantCulture) <= DateTime.ParseExact(s.TimeTo, "HH:mm", CultureInfo.InvariantCulture));
+    var speechResponse = new System.Text.StringBuilder();
+    int talkCount = 0;
+    foreach(var timeSlot in timeSlots)
+    {
+      var talkDetails = timeSlot.Talks.OfType<TalkDetails>();
+      foreach(var talkDetail in talkDetails)
+      {
+        talkCount = talkCount + 1;
+        speechResponse.Append($"{talkDetail.Talk} by {talkDetail.Speaker} at the {talkDetail.RoomName}. ");
+      }
+
+    }
+
+    speechResponse.Insert(0, $"There are {talkCount} {(talkCount > 1 ? "talks" : "talk")} at . ");
+                <p>@speechResponse.ToString()</p>
+}

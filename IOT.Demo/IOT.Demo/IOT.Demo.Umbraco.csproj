@@ -2236,7 +2236,28 @@
     <Content Include="Umbraco\Views\users\views\groups\groups.html" />
     <Content Include="Umbraco\Views\users\views\users\users.html" />
     <Content Include="Umbraco\Views\users\views\user\details.html" />
+    <Content Include="uSync\v8\ContentTypes\article.config" />
+    <Content Include="uSync\v8\ContentTypes\articlecontrols.config" />
+    <Content Include="uSync\v8\ContentTypes\articlelist.config" />
+    <Content Include="uSync\v8\ContentTypes\codegarden.config" />
+    <Content Include="uSync\v8\ContentTypes\conferenceschedule.config" />
+    <Content Include="uSync\v8\ContentTypes\contact.config" />
+    <Content Include="uSync\v8\ContentTypes\contactformcontrols.config" />
+    <Content Include="uSync\v8\ContentTypes\content.config" />
+    <Content Include="uSync\v8\ContentTypes\contentcontrols.config" />
+    <Content Include="uSync\v8\ContentTypes\error.config" />
+    <Content Include="uSync\v8\ContentTypes\festival.config" />
+    <Content Include="uSync\v8\ContentTypes\footercontrols.config" />
+    <Content Include="uSync\v8\ContentTypes\headercontrols.config" />
+    <Content Include="uSync\v8\ContentTypes\home.config" />
+    <Content Include="uSync\v8\ContentTypes\iconlinkitem.config" />
+    <Content Include="uSync\v8\ContentTypes\mainimagecontrols.config" />
+    <Content Include="uSync\v8\ContentTypes\scheduleitem.config" />
+    <Content Include="uSync\v8\ContentTypes\search.config" />
+    <Content Include="uSync\v8\ContentTypes\seocontrols.config" />
+    <Content Include="uSync\v8\ContentTypes\talkdetails.config" />
     <Content Include="uSync\v8\ContentTypes\visibilitycontrols.config" />
+    <Content Include="uSync\v8\ContentTypes\xmlsitemap.config" />
     <Content Include="uSync\v8\DataTypes\ApprovedColor.config" />
     <Content Include="uSync\v8\DataTypes\CheckboxList.config" />
     <Content Include="uSync\v8\DataTypes\ContentGrid.config" />
@@ -2263,19 +2284,27 @@
     <Content Include="uSync\v8\DataTypes\Numeric.config" />
     <Content Include="uSync\v8\DataTypes\Radiobox.config" />
     <Content Include="uSync\v8\DataTypes\RichtextEditor.config" />
+    <Content Include="uSync\v8\DataTypes\RoomNames.config" />
+    <Content Include="uSync\v8\DataTypes\Schedule.config" />
     <Content Include="uSync\v8\DataTypes\SingleUrlPicker.config" />
     <Content Include="uSync\v8\DataTypes\Tags.config" />
+    <Content Include="uSync\v8\DataTypes\TalkDetails.config" />
     <Content Include="uSync\v8\DataTypes\Textarea.config" />
     <Content Include="uSync\v8\DataTypes\Textstring.config" />
     <Content Include="uSync\v8\DataTypes\TrueFalse.config" />
     <Content Include="uSync\v8\DataTypes\Upload.config" />
     <Content Include="uSync\v8\Languages\en-us.config" />
+    <Content Include="uSync\v8\MediaTypes\file.config" />
+    <Content Include="uSync\v8\MediaTypes\folder.config" />
+    <Content Include="uSync\v8\MediaTypes\image.config" />
+    <Content Include="uSync\v8\MemberTypes\member.config" />
     <Content Include="uSync\v8\Templates\article.config" />
     <Content Include="uSync\v8\Templates\articlelist.config" />
     <Content Include="uSync\v8\Templates\codegarden.config" />
     <Content Include="uSync\v8\Templates\contact.config" />
     <Content Include="uSync\v8\Templates\content.config" />
     <Content Include="uSync\v8\Templates\error.config" />
+    <Content Include="uSync\v8\Templates\festival.config" />
     <Content Include="uSync\v8\Templates\home.config" />
     <Content Include="uSync\v8\Templates\master.config" />
     <Content Include="uSync\v8\Templates\search.config" />
@@ -2309,18 +2338,20 @@
   <ItemGroup>
     <Compile Include="Components\RegisterHandlerComponent.cs" />
     <Compile Include="Composers\RegisterHandlerComposer.cs" />
-    <Compile Include="Controllers\AlexaCodeGardenApiController.cs" />
+    <Compile Include="Controllers\AlexaApiController.cs" />
     <Compile Include="Controllers\AlexaFlashBriefingApiController.cs" />
     <Compile Include="Controllers\GoogleActionNewsController.cs" />
     <Compile Include="Models\CmsGenerated\Article.generated.cs" />
     <Compile Include="Models\CmsGenerated\ArticleControls.generated.cs" />
     <Compile Include="Models\CmsGenerated\ArticleList.generated.cs" />
     <Compile Include="Models\CmsGenerated\CodeGarden.generated.cs" />
+    <Compile Include="Models\CmsGenerated\ConferenceSchedule.generated.cs" />
     <Compile Include="Models\CmsGenerated\Contact.generated.cs" />
     <Compile Include="Models\CmsGenerated\ContactFormControls.generated.cs" />
     <Compile Include="Models\CmsGenerated\Content.generated.cs" />
     <Compile Include="Models\CmsGenerated\ContentControls.generated.cs" />
     <Compile Include="Models\CmsGenerated\Error.generated.cs" />
+    <Compile Include="Models\CmsGenerated\Festival.generated.cs" />
     <Compile Include="Models\CmsGenerated\File.generated.cs" />
     <Compile Include="Models\CmsGenerated\Folder.generated.cs" />
     <Compile Include="Models\CmsGenerated\FooterControls.generated.cs" />
@@ -2330,8 +2361,12 @@
     <Compile Include="Models\CmsGenerated\Image.generated.cs" />
     <Compile Include="Models\CmsGenerated\MainImageControls.generated.cs" />
     <Compile Include="Models\CmsGenerated\Member.generated.cs" />
+    <Compile Include="Models\CmsGenerated\News.generated.cs" />
+    <Compile Include="Models\CmsGenerated\NewsList.generated.cs" />
+    <Compile Include="Models\CmsGenerated\ScheduleItem.generated.cs" />
     <Compile Include="Models\CmsGenerated\Search.generated.cs" />
     <Compile Include="Models\CmsGenerated\SEocontrols.generated.cs" />
+    <Compile Include="Models\CmsGenerated\TalkDetails.generated.cs" />
     <Compile Include="Models\CmsGenerated\VisibilityControls.generated.cs" />
     <Compile Include="Models\CmsGenerated\XMlsitemap.generated.cs" />
     <Compile Include="Models\ViewModels\AlexaFlashBriefingViewModel.cs" />
@@ -2485,27 +2520,7 @@
     <Content Include="SpeechAssets\response.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\CodeGarden.cshtml" />
-    <Content Include="uSync\v8\ContentTypes\article.config" />
-    <Content Include="uSync\v8\ContentTypes\articlecontrols.config" />
-    <Content Include="uSync\v8\ContentTypes\articlelist.config" />
-    <Content Include="uSync\v8\ContentTypes\codegarden.config" />
-    <Content Include="uSync\v8\ContentTypes\contact.config" />
-    <Content Include="uSync\v8\ContentTypes\contactformcontrols.config" />
-    <Content Include="uSync\v8\ContentTypes\content.config" />
-    <Content Include="uSync\v8\ContentTypes\contentcontrols.config" />
-    <Content Include="uSync\v8\ContentTypes\error.config" />
-    <Content Include="uSync\v8\ContentTypes\footercontrols.config" />
-    <Content Include="uSync\v8\ContentTypes\headercontrols.config" />
-    <Content Include="uSync\v8\ContentTypes\home.config" />
-    <Content Include="uSync\v8\ContentTypes\iconlinkitem.config" />
-    <Content Include="uSync\v8\ContentTypes\mainimagecontrols.config" />
-    <Content Include="uSync\v8\ContentTypes\search.config" />
-    <Content Include="uSync\v8\ContentTypes\seocontrols.config" />
-    <Content Include="uSync\v8\ContentTypes\xmlsitemap.config" />
-    <Content Include="uSync\v8\MediaTypes\file.config" />
-    <Content Include="uSync\v8\MediaTypes\folder.config" />
-    <Content Include="uSync\v8\MediaTypes\image.config" />
-    <Content Include="uSync\v8\MemberTypes\member.config" />
+    <Content Include="Views\Festival.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2547,6 +2562,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
+  <PropertyGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />

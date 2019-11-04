@@ -8,7 +8,6 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Configuration;
 using System.Web.Http;
 
@@ -18,7 +17,7 @@ namespace IOT.Demo.Umbraco.RequestHandlers
     {
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage requestMessage, CancellationToken cancellationToken)
         {
-            if (WebConfigurationManager.AppSettings["mode"] != "debug" && requestMessage.RequestUri.AbsolutePath.ToLower().Contains("umbraco/api/alexacodegardenapi"))
+            if (WebConfigurationManager.AppSettings["mode"] != "debug" && requestMessage.RequestUri.AbsolutePath.ToLower().Contains("umbraco/api/alexaapi/friendlyevents"))
             {
                 //Requests that Alexa sends to your web service include two HTTP headers that you must use to 
                 // check the request signature:SignatureCertChainUrl, Signature
